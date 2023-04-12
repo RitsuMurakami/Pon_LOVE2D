@@ -6,10 +6,8 @@ local bar = require "bar"
 function love.load()
     window_settings()
 
-    playerR = bar.new(5, 4, true)
-    if playerR.x then
-        print('is')
-    end
+    playerL = bar.new(5, 144/2-16, true)
+    playerR = bar.new(160-5-16, 144/2-16, false)
 
 end
 
@@ -18,14 +16,13 @@ function love.update()
 end
 
 function love.draw()
-    maid64.start()
+    maid64.start()  -- レンダリング開始
 
-    if playerR then
-        print('is')
-    end
-    playerR.draw(5, 6)
+    playerL.control(1)
+    playerL.draw()
+    playerR.draw()
 
-    maid64.finish()
+    maid64.finish()  -- レンダリング終了
 end
 
 
