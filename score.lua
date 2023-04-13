@@ -1,6 +1,7 @@
 local score = {}
 
-function score.new(x, y, LR)
+score.new = function (x, y, LR)
+    -- コンストラクタ関数
     local self = {}
 end
 

@@ -16,9 +16,16 @@ bar.new = function (_x, _y, _LR)
 
 
     self.control = function(value)
-        if self.LR and love.keyboard.isDown('up') then
+        -- 操作系
+        if (not self.LR) and love.keyboard.isDown('up') and self.y > 0 then
             self.y = self.y - value
-        elseif self.LR and love.keyboard.isDown('down') then
+        elseif (not self.LR) and love.keyboard.isDown('down') and self.y < 144-32 then
+            self.y = self.y + value
+        end
+
+        if self.LR and love.keyboard.isDown('w') and self.y > 0 then
+            self.y = self.y - value
+        elseif self.LR and love.keyboard.isDown('s') and self.y < 144-32 then
             self.y = self.y + value
         end
     end

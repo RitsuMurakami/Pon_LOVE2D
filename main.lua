@@ -8,6 +8,7 @@ function love.load()
 
     playerL = bar.new(5, 144/2-16, true)
     playerR = bar.new(160-5-16, 144/2-16, false)
+    Ball = ball.new(160/80, 144/2, 1, 1)
 
 end
 
@@ -18,9 +19,16 @@ end
 function love.draw()
     maid64.start()  -- レンダリング開始
 
-    playerL.control(1)
+    -- プレイヤーの操作受付
+    playerL.control(1.5)
+    playerR.control(1.5)
+
+    -- 描画
     playerL.draw()
     playerR.draw()
+
+    Ball.draw()
+
 
     maid64.finish()  -- レンダリング終了
 end
