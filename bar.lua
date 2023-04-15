@@ -30,6 +30,9 @@ bar.new = function (_x, _y, _LR)
         end
     end
 
+    self.reflect_ball = function(ball)
+
+    end
     --return bar
     return self
 end
