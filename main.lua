@@ -3,12 +3,14 @@ local ball = require "ball"
 local score = require "score"
 local bar = require "bar"
 
+local scene = 0
+
 function love.load()
     window_settings()
 
     playerL = bar.new(5, 144/2-16, true)
     playerR = bar.new(160-5-16, 144/2-16, false)
-    Ball = ball.new(160/2, 144/2, 1, 1, 30)
+    Ball = ball.new(160/2, 144/2, 0.75, 0.75, 30)
 
 end
 
@@ -19,17 +21,7 @@ end
 function love.draw()
     maid64.start()  -- レンダリング開始
 
-    -- プレイヤーの操作受付
-    playerL.control()
-    playerR.control()
-
-    -- 描画
-    playerL.draw()
-    playerR.draw()
-
-    Ball.control(1)
-    Ball.draw()
-
+    scene_switch(scene)
 
     maid64.finish()  -- レンダリング終了
 end
@@ -41,4 +33,43 @@ function window_settings()
 
     -- maid64の初期化
     maid64.setup(160, 144)
+end
+
+function scene_switch(_scene)
+    if _scene == 0 then
+        -- 待機
+        playerL.control(1.5)
+        playerR.control(1.5)
+
+        -- 描画
+        playerL.draw()
+        playerR.draw()
+        Ball.draw()
+
+    elseif _scene == 1 then
+        -- プレイヤーの操作受付
+        playerL.control(1.5)
+        playerR.control(1.5)
+        playerL.reflect_ball(Ball)
+        playerR.reflect_ball(Ball)
+
+        -- 描画
+        playerL.draw()
+        playerR.draw()
+
+        Ball.control(1)
+        Ball.draw()
+
+    elseif _scene == 2 then
+        -- 得点表示
+
+        -- プレイヤーの操作受付
+        playerL.control(1.5)
+        playerR.control(1.5)
+
+        -- 描画
+        playerL.draw()
+        playerR.draw()
+
+    end
 end

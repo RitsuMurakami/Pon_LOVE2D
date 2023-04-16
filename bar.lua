@@ -6,7 +6,7 @@ bar.new = function (_x, _y, _LR)
 
     self.x = _x
     self.y = _y
-    self.LR = _LR  -- どちらのプレイヤーか(True or False)
+    self.LR = _LR  -- どちらのプレイヤーか(True or False) True => L
     self.img = maid64.newImage('/img/bar.png', 16, 16)
 
     self.draw = function()
@@ -31,7 +31,12 @@ bar.new = function (_x, _y, _LR)
     end
 
     self.reflect_ball = function(ball)
-
+        -- ボールとぶつかったら
+        if ball.x > self.x and ball.x < self.x + 10 then
+            if ball.y > self.y and ball.y < self.y + 32 then
+                ball.reflect_bar(self.LR, (ball.y - self.y) / 32)
+            end
+        end
     end
     --return bar
     return self

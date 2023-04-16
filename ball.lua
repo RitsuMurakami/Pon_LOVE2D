@@ -10,7 +10,7 @@ ball.new = function(_x, _y, _vx, _vy, _r)
     self.vec = {_vx, _vy}
     self.r = _r
     self.img = maid64.newImage('/img/ball.png', 4, 4)
-    self.value = 1
+    self.value = 1.4
 
     self.control = function()
         -- 座標変化
@@ -33,15 +33,16 @@ ball.new = function(_x, _y, _vx, _vy, _r)
 
     self.reflect_bar = function(LR, pos)
         -- barにぶつかったら
-        self.r = pos / 180
+        self.r = pos * 180
         if LR then
-            self.r = self.r + 90
-        else
             self.r = self.r - 90
+        else
+            self.r = self.r + 90
         end
         self.rad = math.rad(self.r)
 
         self.vec[1] = self.value * math.cos(self.rad)
+        self.vec[2] = -self.value * math.sin(self.rad)
     end
 
     self.draw = function ()
@@ -50,6 +51,7 @@ ball.new = function(_x, _y, _vx, _vy, _r)
     end
 
     return self
+
 end
 
 return ball
