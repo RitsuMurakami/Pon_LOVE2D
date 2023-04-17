@@ -12,6 +12,10 @@ function love.load()
     playerR = bar.new(160-5-16, 144/2-16, false)
     Ball = ball.new(160/2, 144/2, 0.75, 0.75, 30)
 
+    -- score
+    scoreL = score.new(80/2, 144/7, true)
+    scoreR = score.new(160 * 2 / 3, 144/7, false)
+
 end
 
 function love.update()
@@ -41,10 +45,14 @@ function scene_switch(_scene)
         playerL.control(1.5)
         playerR.control(1.5)
 
+        -- timerで、2秒待機
+
         -- 描画
         playerL.draw()
         playerR.draw()
         Ball.draw()
+        scoreL.draw()
+        scoreR.draw()
 
     elseif _scene == 1 then
         -- プレイヤーの操作受付
