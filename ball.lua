@@ -35,14 +35,18 @@ ball.new = function(_x, _y, _vx, _vy, _r)
         -- barにぶつかったら
         self.r = pos * 180
         if LR then
-            self.r = self.r - 90
+            self.r = -(self.r - 90)
         else
-            self.r = self.r + 90
+            self.r = -self.r - 90
         end
         self.rad = math.rad(self.r)
 
         self.vec[1] = self.value * math.cos(self.rad)
-        self.vec[2] = -self.value * math.sin(self.rad)
+        if LR then
+            self.vec[2] = -self.value * math.sin(self.rad)
+        else
+            self.vec[2] = self.value * math.sin(self.rad)
+        end
     end
 
     self.draw = function ()

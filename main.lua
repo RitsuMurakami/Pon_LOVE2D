@@ -2,20 +2,26 @@ local maid64 = require "maid64"
 local ball = require "ball"
 local score = require "score"
 local bar = require "bar"
+local timer = require "timer"
 
 local scene = 0
 
 function love.load()
     window_settings()
 
+    -- player
     playerL = bar.new(5, 144/2-16, true)
     playerR = bar.new(160-5-16, 144/2-16, false)
+
+    -- ball
     Ball = ball.new(160/2, 144/2, 0.75, 0.75, 30)
 
     -- score
     scoreL = score.new(80/2, 144/7, true)
     scoreR = score.new(160 * 2 / 3, 144/7, false)
 
+    -- timer
+    time = timer.new()
 end
 
 function love.update()
@@ -46,6 +52,17 @@ function scene_switch(_scene)
         playerR.control(1.5)
 
         -- timerで、2秒待機
+        if not time.flag then
+            time.set_timer(2)
+        end
+
+        if time.flag then
+            time.timer()
+            if not time.flag then
+                scene = scene + 1
+            end
+        end
+
 
         -- 描画
         playerL.draw()
