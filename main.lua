@@ -63,7 +63,6 @@ function scene_switch(_scene)
             end
         end
 
-
         -- 描画
         playerL.draw()
         playerR.draw()
@@ -85,16 +84,23 @@ function scene_switch(_scene)
         Ball.control(1)
         Ball.draw()
 
-    elseif _scene == 2 then
-        -- 得点表示
+        -- 得点換算処理
+        local out = Ball.reflect_wall()
+        if out then
+            if out == 'r' then
+                scoreR.score = scoreR.score + 1
+            else
+                scoreL.score = scoreL.score + 1
+            end
+        end
 
-        -- プレイヤーの操作受付
-        playerL.control(1.5)
-        playerR.control(1.5)
-
-        -- 描画
-        playerL.draw()
-        playerR.draw()
-
+        -- フィールド外に飛び出していたら、sceneを変え。球を中央に設定
+        if Ball.out_of_frame then
+            scene = 0
+            Ball.out_of_frame = false
+            Ball.x = 80
+            Ball.y = 72
+            Ball.value = 1.4
+        end
     end
 end

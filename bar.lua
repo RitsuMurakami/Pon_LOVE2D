@@ -34,7 +34,7 @@ bar.new = function (_x, _y, _LR)
         -- ボールとぶつかったら
         if ball.x > self.x and ball.x < self.x + 10 then
             if ball.y > self.y and ball.y < self.y + 32 then
-                ball.reflect_bar(self.LR, (ball.y - self.y) / 32)
+                ball.reflect_bar(self.LR, (ball.y - self.y) / 32, 0.001)
             end
         end
     end

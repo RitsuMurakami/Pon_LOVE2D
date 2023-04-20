@@ -25,3 +25,4 @@ timer.new = function ()
 end
 
 return timer
+
